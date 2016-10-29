@@ -7,3 +7,5 @@ Portal, but with magnets
  - Our main Unity project will go inside the Unity top level directory.
    All Art and Audio assets in this directory should be copies and not
    the originals.
+
+### Aesthetic Summary
