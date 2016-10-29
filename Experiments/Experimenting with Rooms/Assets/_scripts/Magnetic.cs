@@ -7,17 +7,29 @@ public class Magnetic : MonoBehaviour
 	public Vector3 m_Position;
 	float m_Radius = 10;
 	float m_Force = 0;
+	enum Polarity {pos, neg, none};
+	Polarity polar = Polarity.none;
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.KeypadPlus) == true) {
-			print ("Hello");
-			m_Force = 50;
+		if (Input.GetMouseButtonDown(0)) {
+			if (polar == Polarity.pos) {
+				m_Force = 0;
+				polar = Polarity.none
+			} else {
+				m_Force = 50;
+				polar = Polarity.pos;
+			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.KeypadMinus) == true) {
-			print ("Hello");
-			m_Force = -50;
+		if (Input.GetMouseButtonDown(1)) {
+			if (polar == Polarity.neg) {
+				m_Force = 0;
+				polar = Polarity.none
+			} else {
+				m_Force = -50;
+				polar = Polarity.neg;
+			}
 		}
 	}
 
