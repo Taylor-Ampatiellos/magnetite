@@ -3,55 +3,39 @@ using System.Collections;
 
 public class Magnetic : MonoBehaviour
 {
-	public LayerMask m_MagneticLayers;
-	public Vector3 m_Position;
+	public int magForce;
+
+	public Material positive, negative;
+
 	float m_Radius = 10;
 	float m_Force = 0;
-	enum Polarity {pos, neg, none};
-	Polarity polar = Polarity.none;
+	const string MAGNETIC_FIELD = "Magnetic Field";
 
-	void Update ()
+	public bool isPos = true;
+
+
+	void OnTriggerStay (Collider other)
 	{
-		if (Input.GetMouseButtonDown(0)) {
-			if (polar == Polarity.pos) {
-				m_Force = 0;
-				polar = Polarity.none
-			} else {
-				m_Force = 50;
-				polar = Polarity.pos;
-			}
-		}
+		if (other.CompareTag (MAGNETIC_FIELD)) {
+			Vector3 dir = other.transform.position - this.transform.position;
+			//Debug.Log (dir);
+			Vector3 force = (5 - dir.magnitude) * dir.normalized * magForce;
 
-		if (Input.GetMouseButtonDown(1)) {
-			if (polar == Polarity.neg) {
-				m_Force = 0;
-				polar = Polarity.none
-			} else {
-				m_Force = -50;
-				polar = Polarity.neg;
+			bool otherIsPos = other.GetComponent<Magnetic> ().isPos;
+			if (isPos ^ otherIsPos) {
+				force *= -1;
 			}
+				
+			//	Debug.Log (force);
+			other.attachedRigidbody.AddForce (force);
 		}
 	}
 
-	void FixedUpdate () 
+	void FixedUpdate ()
 	{
-		Collider[] colliders;
-		Rigidbody rigidbody;
-
-		colliders = Physics.OverlapSphere (transform.position + m_Position, m_Radius, m_MagneticLayers);
-		foreach (Collider collider in colliders) {
-			rigidbody = (Rigidbody)collider.gameObject.GetComponent (typeof(Rigidbody));
-			if (rigidbody == null) {
-				continue;
-			}
-			rigidbody.AddExplosionForce (m_Force * -1, transform.position + m_Position, m_Radius);
+		GameObject parent = this.transform.parent.gameObject;
+		if (parent != null) {
+			parent.GetComponent<Renderer> ().material = (isPos ? positive : negative);
 		}
-
-	}
-
-	void OnDrawGizmosSelected ()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere (transform.position + m_Position, m_Radius);
 	}
 }
