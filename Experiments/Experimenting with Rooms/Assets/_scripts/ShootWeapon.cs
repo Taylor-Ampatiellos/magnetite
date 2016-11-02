@@ -10,9 +10,16 @@ public class ShootWeapon : MonoBehaviour
 
 		if (Input.GetMouseButtonDown (0)) {
 			if (Physics.Raycast (transform.position, transform.forward, out hit, 35)) {
-				if (hit.transform.tag == "Magnetic") {
-					Magnetic child = hit.transform.GetChild (0).gameObject.GetComponent<Magnetic> ();
-					child.isPos = !child.isPos;
+				Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
+				if (magnet != null) {
+					magnet.SetPolarityOrDeactivate (true);
+				}
+			}
+		} else if (Input.GetMouseButtonDown (1)) {
+			if (Physics.Raycast (transform.position, transform.forward, out hit, 35)) {
+				Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
+				if (magnet != null) {
+					magnet.SetPolarityOrDeactivate (false);
 				}
 			}
 		}

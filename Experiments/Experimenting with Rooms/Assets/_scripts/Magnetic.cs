@@ -3,39 +3,56 @@ using System.Collections;
 
 public class Magnetic : MonoBehaviour
 {
-	public int magForce;
+	public GameObject MagneticField;
 
-	public Material positive, negative;
+	[Header ("Properties")]
+	public bool IsPositive = true;
+	public bool IsActive = true;
 
-	float m_Radius = 10;
-	float m_Force = 0;
-	const string MAGNETIC_FIELD = "Magnetic Field";
+	[Header ("Materials")]
+	public Material Positive;
+	public Material Negative;
+	public Material Inactive;
 
-	public bool isPos = true;
 
-
-	void OnTriggerStay (Collider other)
+	void Start ()
 	{
-		if (other.CompareTag (MAGNETIC_FIELD)) {
-			Vector3 dir = other.transform.position - this.transform.position;
-			//Debug.Log (dir);
-			Vector3 force = (5 - dir.magnitude) * dir.normalized * magForce;
-
-			bool otherIsPos = other.GetComponent<Magnetic> ().isPos;
-			if (isPos ^ otherIsPos) {
-				force *= -1;
-			}
-				
-			//	Debug.Log (force);
-			other.attachedRigidbody.AddForce (force);
-		}
+		updateMaterial ();
 	}
 
-	void FixedUpdate ()
+	void updateMaterial ()
 	{
-		GameObject parent = this.transform.parent.gameObject;
-		if (parent != null) {
-			parent.GetComponent<Renderer> ().material = (isPos ? positive : negative);
+		Material newMaterial = Inactive;
+		if (IsActive) {
+			newMaterial = (IsPositive ? Positive : Negative);
 		}
+		GetComponent<Renderer> ().material = newMaterial;
+	}
+
+	public bool SamePolarityAs (Magnetic other)
+	{
+		return IsPositive == other.IsPositive;
+	}
+
+	public bool TogglePolarity ()
+	{
+		IsPositive = !IsPositive;
+		updateMaterial ();
+		return IsPositive;
+	}
+
+	// returns true  if polarity was set
+	//         false if magnet was deactivated
+	public bool SetPolarityOrDeactivate (bool polarity)
+	{
+		bool settingPolarity = IsPositive != polarity;
+		if (settingPolarity) {
+			IsPositive = polarity;
+			IsActive = true;
+		} else {
+			IsActive = !IsActive;
+		}
+		updateMaterial ();
+		return settingPolarity;
 	}
 }
