@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Magnetic : MonoBehaviour
 {
-	public GameObject MagneticField;
-
 	[Header ("Properties")]
 	public bool IsPositive = true;
 	public bool IsActive = true;
