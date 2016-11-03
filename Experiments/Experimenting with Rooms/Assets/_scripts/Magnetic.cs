@@ -39,6 +39,16 @@ public class Magnetic : MonoBehaviour
 		return IsPositive;
 	}
 
+	public void Deactivate ()
+	{
+		IsActive = false;
+	}
+
+	public void Activate ()
+	{
+		IsActive = true;
+	}
+
 	// returns true  if polarity was set
 	//         false if magnet was deactivated
 	public bool SetPolarityOrDeactivate (bool polarity)

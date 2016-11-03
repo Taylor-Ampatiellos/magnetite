@@ -43,6 +43,10 @@ public class PickUpObject : MonoBehaviour {
 				Pickupable p = hit.collider.GetComponent<Pickupable>();
 				if(p != null) {
 					carrying = true;
+					Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
+					if (magnet != null) {
+						magnet.Deactivate();
+					}
 					carriedObject = p.gameObject;
 					//p.gameObject.rigidbody.isKinematic = true;
 					p.gameObject.GetComponent<Rigidbody>().useGravity = false;
@@ -58,9 +62,16 @@ public class PickUpObject : MonoBehaviour {
 	}
 
 	void dropObject() {
+
+		Magnetic magnet = carriedObject.gameObject.GetComponent<Magnetic> ();
+		if (magnet != null) {
+			magnet.Activate();
+		}
+
 		carrying = false;
 		//carriedObject.gameObject.rigidbody.isKinematic = false;
 		carriedObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		carriedObject = null;
+
 	}
 }
