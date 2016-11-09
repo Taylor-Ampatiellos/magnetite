@@ -42,11 +42,13 @@ public class Magnetic : MonoBehaviour
 	public void Deactivate ()
 	{
 		IsActive = false;
+		updateMaterial ();
 	}
 
 	public void Activate ()
 	{
 		IsActive = true;
+		updateMaterial ();
 	}
 
 	// returns true  if polarity was set

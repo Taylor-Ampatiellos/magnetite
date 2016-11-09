@@ -15,23 +15,26 @@ public class MagneticField : MonoBehaviour
 			if (magnet.IsActive && otherMagnet.IsActive) {
 				Vector3 dir, force;
 				BoxCollider bc = GetComponent<BoxCollider> ();
+
+				dir = other.transform.position - this.transform.position;
 				if (bc != null) {
-					float ax = Mathf.Abs (bc.size.x);
-					float ay = Mathf.Abs (bc.size.y);
-					float az = Mathf.Abs (bc.size.z);
+					float ax = Mathf.Abs (magnet.transform.lossyScale.x);
+					float ay = Mathf.Abs (magnet.transform.lossyScale.y);
+					float az = Mathf.Abs (magnet.transform.lossyScale.z);
 
+					float mag = Mathf.Abs (dir.magnitude);
 					if (ax < ay && ax < az) { // x is smallest
-						dir = new Vector3 (bc.size.x, 0, 0);
+						dir = new Vector3 (mag * (dir.x < 0 ? -1 : 1), 0, 0);
 					} else if (ay < az) { // y is smallest
-						dir = new Vector3 (0, bc.size.y, 0);
+						dir = new Vector3 (0, mag * (dir.y < 0 ? -1 : 1), 0);
 					} else { // z is smallest
-						dir = new Vector3 (0, 0, bc.size.z);
+						dir = new Vector3 (0, 0, mag * (dir.z < 0 ? -1 : 1));
 					}
-				} else {
-					dir = other.transform.position - this.transform.position;
+					Debug.Log (dir);
 				}
+				Debug.DrawRay (magnet.transform.position, dir);
 
-				force = (5 - dir.magnitude) * dir.normalized * magForce;
+				force = (Mathf.Abs (5 - dir.magnitude)) * dir.normalized * magForce;
 
 				if (!magnet.SamePolarityAs (otherMagnet)) {
 					force *= -1;
