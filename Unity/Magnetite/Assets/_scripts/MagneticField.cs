@@ -8,7 +8,7 @@ public class MagneticField : MonoBehaviour
 
 	void OnTriggerStay (Collider other)
 	{
-		if (other.CompareTag (MAGNETIC_FIELD)) {
+		if (other.CompareTag (MAGNETIC_FIELD) && other.attachedRigidbody != null) {
 			Magnetic magnet = transform.parent.GetComponent<Magnetic> ();
 			Magnetic otherMagnet = other.transform.parent.GetComponent<Magnetic> ();
 
@@ -30,9 +30,11 @@ public class MagneticField : MonoBehaviour
 					} else { // z is smallest
 						dir = new Vector3 (0, 0, mag * (dir.z < 0 ? -1 : 1));
 					}
-					Debug.Log (dir);
+					if (magnet.name.Equals ("Room4_RightWall")) {
+						Debug.Log (dir);
+					}
 				}
-				Debug.DrawRay (magnet.transform.position, dir);
+				//Debug.DrawRay (magnet.transform.position, dir);
 
 				force = (Mathf.Abs (5 - dir.magnitude)) * dir.normalized * magForce;
 
@@ -40,7 +42,11 @@ public class MagneticField : MonoBehaviour
 					force *= -1;
 				}
 
-				other.attachedRigidbody.AddForce (force);
+				if (other.attachedRigidbody != null) { 
+					other.attachedRigidbody.AddForce (force);
+				} else {
+					Debug.LogError ("Magnetic field " + other.name + " with parent " + other.transform.parent.name + " does not have a magnet");
+				}
 			}
 		}
 	}
