@@ -36,7 +36,7 @@ public class MagneticField : MonoBehaviour
 				}
 				//Debug.DrawRay (magnet.transform.position, dir);
 
-				force = (Mathf.Abs (5 - dir.magnitude)) * dir.normalized * magForce;
+				force = (Mathf.Abs (6 - dir.magnitude)) * dir.normalized * magForce;
 
 				if (!magnet.SamePolarityAs (otherMagnet)) {
 					force *= -1;
