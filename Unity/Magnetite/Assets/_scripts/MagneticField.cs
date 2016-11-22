@@ -30,9 +30,6 @@ public class MagneticField : MonoBehaviour
 					} else { // z is smallest
 						dir = new Vector3 (0, 0, mag * (dir.z < 0 ? -1 : 1));
 					}
-					if (magnet.name.Equals ("Room4_RightWall")) {
-						Debug.Log (dir);
-					}
 				}
 				//Debug.DrawRay (magnet.transform.position, dir);
 
