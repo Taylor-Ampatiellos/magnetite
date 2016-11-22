@@ -60,7 +60,12 @@ public class Magnetic : MonoBehaviour
 			IsPositive = polarity;
 			IsActive = true;
 		} else {
-			IsActive = !IsActive;
+			if (IsActive) {
+				IsActive = false;
+			} else {
+				IsActive = true;
+				settingPolarity = true;
+			}
 		}
 		updateMaterial ();
 		return settingPolarity;

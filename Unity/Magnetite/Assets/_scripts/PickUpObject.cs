@@ -8,10 +8,13 @@ public class PickUpObject : MonoBehaviour
 	GameObject carriedObject;
 	public float distance;
 	public float smooth;
+	public AudioClip pickupSound, holdSound, dropSound;
+	private AudioSource pickupAudioSource;
 	// Use this for initialization
 	void Start ()
 	{
 		mainCamera = GameObject.FindWithTag ("MainCamera");
+		pickupAudioSource = gameObject.AddComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -35,6 +38,7 @@ public class PickUpObject : MonoBehaviour
 	{
 		o.transform.position = Vector3.Lerp (o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth);
 		o.transform.rotation = Quaternion.identity;
+		playHoldSound ();
 	}
 
 	void pickup ()
@@ -57,6 +61,7 @@ public class PickUpObject : MonoBehaviour
 					//p.gameObject.rigidbody.isKinematic = true;
 					carriedObject.GetComponent<Rigidbody> ().useGravity = false;
 					carriedObject.layer = 2;
+					playPickupSound ();
 				}
 			}
 		}
@@ -76,5 +81,28 @@ public class PickUpObject : MonoBehaviour
 		carriedObject.gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		carriedObject.layer = 0;
 		carriedObject = null;
+		playDropSound ();
+	}
+
+	void playPickupSound ()
+	{
+		pickupAudioSource.clip = pickupSound;
+		pickupAudioSource.Play ();
+	}
+
+	void playHoldSound ()
+	{
+		if (!pickupAudioSource.isPlaying) {
+			pickupAudioSource.clip = holdSound;
+			pickupAudioSource.loop = true;
+			pickupAudioSource.Play ();
+		}
+	}
+
+	void playDropSound ()
+	{
+		pickupAudioSource.clip = dropSound;
+		pickupAudioSource.loop = false;
+		pickupAudioSource.Play ();
 	}
 }

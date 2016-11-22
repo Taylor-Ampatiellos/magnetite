@@ -4,6 +4,7 @@ using System.Collections;
 public class FieldRenderer : MonoBehaviour
 {
 	public bool RenderMagneticFields = false;
+	public Material inactiveWallMaterial;
 
 	void Start ()
 	{
