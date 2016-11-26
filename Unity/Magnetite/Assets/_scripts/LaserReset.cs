@@ -3,15 +3,15 @@ using System.Collections;
 
 public class LaserReset : MonoBehaviour {
 
-	// Use this for initialization
-
-	
-		void OnTriggerEnter(Collider other) {
-			if(other.gameObject.tag == "Laser") { //Or whatever
-				transform.position = new Vector3(-7, 8, -73);
-			}
-
+	Vector3 check;
+		
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.tag == "Laser") { //Or whatever
+			transform.position = check;
 		}
 
-	
+		if (other.gameObject.tag == "checkpoint") { //Or whatever
+			check = other.transform.position;
+		}
+	}
 }
