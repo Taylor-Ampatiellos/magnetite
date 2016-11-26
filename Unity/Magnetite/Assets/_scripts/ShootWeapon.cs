@@ -20,7 +20,8 @@ public class ShootWeapon : MonoBehaviour
 
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 35)) {
 			Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
-			if (magnet != null) {
+			notChangable cantchange = hit.transform.gameObject.GetComponent<notChangable> ();
+			if (magnet != null && cantchange == null) {
 				change.SetImage1 ();
 				if (Input.GetMouseButtonDown (0) && canShootBlue) {
 					if (magnet.SetPolarityOrDeactivate (true)) {
