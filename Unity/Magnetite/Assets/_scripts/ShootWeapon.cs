@@ -11,33 +11,32 @@ public class ShootWeapon : MonoBehaviour
 	public AudioClip redSound;
 	public AudioClip deactivateSound;
 
+	public changeImage change;
+
 	void Update ()
 	{
 		RaycastHit hit;
 		Debug.DrawRay (transform.position, transform.forward * 35);
 
-		if (Input.GetMouseButtonDown (0) && canShootBlue) {
-			if (Physics.Raycast (transform.position, transform.forward, out hit, 35)) {
-				Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
-				if (magnet != null) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 35)) {
+			Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
+			if (magnet != null) {
+				change.SetImage1 ();
+				if (Input.GetMouseButtonDown (0) && canShootBlue) {
 					if (magnet.SetPolarityOrDeactivate (true)) {
 						PlaySound (blueSound);
 					} else {
 						PlaySound (deactivateSound);
 					}
-
-				}
-			}
-		} else if (Input.GetMouseButtonDown (1) && canShootRed) {
-			if (Physics.Raycast (transform.position, transform.forward, out hit, 35)) {
-				Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
-				if (magnet != null) {
+				} else if (Input.GetMouseButtonDown (1) && canShootRed) {
 					if (magnet.SetPolarityOrDeactivate (false)) {
 						PlaySound (redSound);
 					} else {
 						PlaySound (deactivateSound);
 					}
 				}
+			} else {
+				change.SetImage2 ();
 			}
 		}
 	}
