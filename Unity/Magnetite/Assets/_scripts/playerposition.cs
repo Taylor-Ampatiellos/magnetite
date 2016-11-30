@@ -2,5 +2,5 @@
 using System.Collections;
 
 public class playerposition : MonoBehaviour {
-	public Vector3 check;
+	public Vector3 spawn;
 }
