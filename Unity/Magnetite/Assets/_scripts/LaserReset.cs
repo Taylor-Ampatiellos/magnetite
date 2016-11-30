@@ -24,4 +24,10 @@ public class LaserReset : MonoBehaviour {
 			pos.GetComponent<playerposition> ().spawn = other.transform.position;
 		}
 	}
+
+	public void Reset() {
+		DontDestroyOnLoad (pos);
+		Scene scene = SceneManager.GetActiveScene ();
+		SceneManager.LoadScene (scene.name);
+	}
 }

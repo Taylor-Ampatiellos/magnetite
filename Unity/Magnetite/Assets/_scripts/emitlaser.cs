@@ -8,17 +8,24 @@ public class emitlaser : MonoBehaviour {
 
 	private LineRenderer laserLine;
 
+	LaserReset player;
+
 	void Start () {
 		laserLine = GetComponent<LineRenderer> ();
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<LaserReset>();
 	}
 
 	void Update () {
-			Vector3 rayOrigin = new Vector3 (5, 5, 5);
+			Vector3 rayOrigin = transform.position;
 			RaycastHit hit;
 
 			laserLine.SetPosition (0, gunEnd.position);
 
 			if (Physics.Raycast (rayOrigin, transform.forward, out hit, weaponRange)) {
+			if (hit.transform.tag == "Player") { 
+				player.Reset ();
+			}
+
 				laserLine.SetPosition (1, hit.point);
 			} else {
 				laserLine.SetPosition (1, rayOrigin + (transform.forward * weaponRange));
