@@ -24,11 +24,14 @@ public class MagneticField : MonoBehaviour
 
 					float mag = Mathf.Abs (dir.magnitude);
 					if (ax < ay && ax < az) { // x is smallest
-						dir = new Vector3 (mag * (dir.x < 0 ? -1 : 1), 0, 0);
+						mag = other.transform.position.x - this.transform.position.x;
+						dir = new Vector3 (mag, 0, 0);
 					} else if (ay < az) { // y is smallest
-						dir = new Vector3 (0, mag * (dir.y < 0 ? -1 : 1), 0);
+						mag = other.transform.position.y - this.transform.position.y;
+						dir = new Vector3 (0, mag, 0);
 					} else { // z is smallest
-						dir = new Vector3 (0, 0, mag * (dir.z < 0 ? -1 : 1));
+						mag = other.transform.position.z - this.transform.position.z;
+						dir = new Vector3 (0, 0, mag);
 					}
 				}
 				//Debug.DrawRay (magnet.transform.position, dir);
