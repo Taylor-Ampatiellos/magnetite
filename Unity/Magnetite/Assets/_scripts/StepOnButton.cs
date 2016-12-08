@@ -8,7 +8,7 @@ public class StepOnButton : MonoBehaviour {
 
 	void Update(){
 		if(IsOpening == true){
-			Door.transform.Translate(Vector3.down*Time.deltaTime*50);
+			Door.transform.Translate(Vector3.down*Time.deltaTime*20);
 		}
 		if(Door.transform.position.y > 300){
 			IsOpening = false; 
