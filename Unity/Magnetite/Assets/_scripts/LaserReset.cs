@@ -5,6 +5,7 @@ using System.Collections;
 public class LaserReset : MonoBehaviour {
 
 	GameObject pos;
+	Collider collider;
 
 	void Start() {
 		pos = GameObject.FindGameObjectWithTag("PlayerPosition");
@@ -13,6 +14,7 @@ public class LaserReset : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+		collider = other;
 		DontDestroyOnLoad (pos);
 
 		if (other.gameObject.tag == "Laser") { 
@@ -22,6 +24,12 @@ public class LaserReset : MonoBehaviour {
 
 		if (other.gameObject.tag == "checkpoint") { 
 			pos.GetComponent<playerposition> ().spawn = other.transform.position;
+		}
+	}
+
+	void Update() {
+		if (collider.gameObject.tag == "Platform") { 
+			transform.position = collider.transform.position;
 		}
 	}
 
