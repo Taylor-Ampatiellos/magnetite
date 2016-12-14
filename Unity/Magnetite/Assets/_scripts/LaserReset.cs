@@ -52,15 +52,15 @@ public class LaserReset : MonoBehaviour {
 	void Update() {
 		if (collider != null) {
 			if (collider.gameObject.tag == "Platform") { 
-				plat_change_x = collider.transform.position.x - plat_x;
+		//		plat_change_x = collider.transform.position.x - plat_x;
 				plat_change_z = collider.transform.position.z - plat_z;
 
 				Debug.Log (plat_change_x);
 				Debug.Log (plat_change_z);
 
-				float x = play_x + plat_change_x;
+		//		float x = play_x + plat_change_x;
 				float z = play_z + plat_change_z;
-				transform.position = new Vector3 (x, transform.position.y, z);
+				transform.position = new Vector3 (transform.position.x, transform.position.y, z);
 			}
 		}
 	}
