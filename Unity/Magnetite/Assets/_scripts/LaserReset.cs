@@ -60,7 +60,11 @@ public class LaserReset : MonoBehaviour {
 
 				float x = play_x + plat_change_x;
 				float z = play_z + plat_change_z;
-				transform.position = new Vector3 (x, transform.position.y, z);
+				transform.position = new Vector3 (transform.position.x + plat_change_x, transform.position.y, transform.position.z + plat_change_z);
+
+				plat_x = collider.transform.position.x;
+				plat_z = collider.transform.position.z;
+
 			}
 		}
 	}
