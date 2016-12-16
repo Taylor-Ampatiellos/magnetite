@@ -1,6 +1,6 @@
 //Maya ASCII 2015 scene
 //Name: animated_hand.ma
-//Last modified: Tue, Nov 29, 2016 07:18:01 PM
+//Last modified: Fri, Dec 16, 2016 01:54:56 PM
 //Codeset: UTF-8
 requires maya "2015";
 requires -nodeType "mentalrayFramebuffer" -nodeType "mentalrayOptions" -nodeType "mentalrayGlobals"
@@ -14,14 +14,14 @@ fileInfo "osv" "Mac OS X 10.9.5";
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0.64809322596482477 19.496735926329034 -12.253459478819876 ;
-	setAttr ".r" -type "double3" 324.86164729388673 26462.199999986104 0 ;
+	setAttr ".t" -type "double3" 2.0140231866608338 23.507232618465675 -33.697035240372557 ;
+	setAttr ".r" -type "double3" 338.06164729349138 26817.799999982562 0 ;
 	setAttr ".rp" -type "double3" -2.7755575615628914e-16 -8.8817841970012523e-16 8.8817841970012523e-16 ;
 	setAttr ".rpt" -type "double3" 4.3626568551416334e-14 2.6496200997438465e-16 -7.4075025742106386e-14 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 16.234435768711343;
+	setAttr ".coi" 36.931042559673372;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -1196,7 +1196,7 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        setFocus `paneLayout -q -p1 $gMainPane`;\n        sceneUIReplacement -deleteRemaining;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 5 -size 12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
-	setAttr ".b" -type "string" "playbackOptions -min 10 -max 40 -ast 1 -aet 100 ";
+	setAttr ".b" -type "string" "playbackOptions -min 10 -max 100 -ast 1 -aet 100 ";
 	setAttr ".st" 6;
 createNode polyTweak -n "polyTweak7";
 	setAttr ".uopa" yes;
@@ -71415,8 +71415,8 @@ createNode polyMergeEdge -n "polyMergeEdge7";
 	setAttr ".fe" 13300;
 	setAttr ".se" 13303;
 select -ne :time1;
-	setAttr ".o" 17;
-	setAttr ".unw" 17;
+	setAttr ".o" 40;
+	setAttr ".unw" 40;
 select -ne :renderPartition;
 	setAttr -s 37 ".st";
 select -ne :renderGlobalsList1;
