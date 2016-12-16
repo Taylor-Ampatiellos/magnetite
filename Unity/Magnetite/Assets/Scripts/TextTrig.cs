@@ -9,5 +9,6 @@ public class TextTrig : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			Destroy(GameObject.FindGameObjectWithTag ("text"));
 		}
+
 	}
 }
