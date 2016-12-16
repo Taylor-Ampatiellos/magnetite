@@ -29,6 +29,7 @@ public class LaserReset : MonoBehaviour {
 		}
 
 		if (other.gameObject.tag == "checkpoint") { 
+			Destroy(GameObject.FindGameObjectWithTag ("text"));
 			pos.GetComponent<playerposition> ().spawn = other.transform.position;
 			collider = other;
 		}

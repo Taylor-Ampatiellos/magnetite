@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 130aae1101b452f4e8d123f753382781
-timeCreated: 1481748151
+timeCreated: 1481924018
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buttonSound: {fileID: 8300000, guid: 38784eba162162940abee3e1f3d0144d, type: 3}
+  - doorSound: {fileID: 8300000, guid: 32040f36b3d72db408bdc049b60cb5d9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
