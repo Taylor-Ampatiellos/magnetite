@@ -16,22 +16,19 @@ public class emitlaser : MonoBehaviour {
 	}
 
 	void Update () {
-		int mask = 1 << 8;
-		mask = ~mask;
+			Vector3 rayOrigin = transform.position;
+			RaycastHit hit;
 
-		Vector3 rayOrigin = transform.position;
-		RaycastHit hit;
+			laserLine.SetPosition (0, gunEnd.position);
 
-		laserLine.SetPosition (0, gunEnd.position);
-
-		if (Physics.Raycast (rayOrigin, transform.forward, out hit, weaponRange, mask)) {
+			if (Physics.Raycast (rayOrigin, transform.forward, out hit, weaponRange)) {
 			if (hit.transform.tag == "Player") { 
 				player.Reset ();
 			}
 
-			laserLine.SetPosition (1, hit.point);
-		} else {
-			laserLine.SetPosition (1, rayOrigin + (transform.forward * weaponRange));
-		}
+				laserLine.SetPosition (1, hit.point);
+			} else {
+				laserLine.SetPosition (1, rayOrigin + (transform.forward * weaponRange));
+			}
 	}
 }
