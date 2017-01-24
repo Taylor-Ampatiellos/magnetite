@@ -5,6 +5,7 @@ public class DoorController : MonoBehaviour
 {
 
 	public GameObject Door;
+	public GameObject Button;
 	public bool IsOpening;
 
 	[HideInInspector]
@@ -14,9 +15,9 @@ public class DoorController : MonoBehaviour
 	void Update ()
 	{
 		if (IsOpening == true) {
-			Door.transform.Translate (Vector3.up * Time.deltaTime * 10);
+			Door.transform.Translate (Vector3.up * Time.deltaTime/9 * 10);
 		}
-		if (Door.transform.position.y > 10f) {
+		if (Door.transform.position.y > 7.5f) {
 			IsOpening = false; 
 		}
 	}
@@ -25,8 +26,8 @@ public class DoorController : MonoBehaviour
 	{
 		if (collider.gameObject.tag == "Magnetic") {
 			IsOpening = true;
-			buttonAudioSource.Play ();
-			doorAudioSource.Play ();
+			Door.GetComponent<AudioSource>().Play ();
+			Button.GetComponent<AudioSource>().Play ();
 		}
 	}
 }
