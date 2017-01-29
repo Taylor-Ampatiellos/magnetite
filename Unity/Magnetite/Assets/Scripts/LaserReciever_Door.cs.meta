@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f9c1a27cf253f6d43b8fee8880c83ff1
+timeCreated: 1485719098
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Door: {instanceID: 0}
+  - Button: {instanceID: 0}
+  - buttonAudioSource: {instanceID: 0}
+  - doorAudioSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
