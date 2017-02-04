@@ -18,9 +18,9 @@ public class ShootWeapon : MonoBehaviour
 		int mask = 1 << 8;
 		mask = ~mask;
 		RaycastHit hit;
-		Debug.DrawRay (transform.position, transform.forward * 35);
+		Debug.DrawRay (transform.position, transform.forward * 50);
 
-		if (Physics.Raycast (transform.position, transform.forward, out hit, 35, mask)) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 50, mask)) {
 			Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
 			notChangable cantchange = hit.transform.gameObject.GetComponent<notChangable> ();
 			if (magnet != null && cantchange == null) {
