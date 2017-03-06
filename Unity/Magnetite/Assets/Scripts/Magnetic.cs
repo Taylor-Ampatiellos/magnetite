@@ -27,6 +27,14 @@ public class Magnetic : MonoBehaviour
 		GetComponent<Renderer> ().material = newMaterial;
 	}
 
+	private void OnTriggerEnter (Collider collision)
+	{
+		if (collision.gameObject.tag == "pbullet") {
+			SetPolarityOrDeactivate (true);
+			Destroy (collision.gameObject);
+		}
+	}
+
 	public bool SamePolarityAs (Magnetic other)
 	{
 		return IsPositive == other.IsPositive;
