@@ -37,9 +37,9 @@ public class ShootWeapon : MonoBehaviour
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 50, mask)) {
 			Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
 			notChangable cantchange = hit.transform.gameObject.GetComponent<notChangable> ();
-			/*if (magnet != null && cantchange == null) {
+			if (magnet != null && cantchange == null) {
 				change.SetImage1 ();
-				if (Input.GetMouseButtonDown (0) && canShootBlue) {
+				/* if (Input.GetMouseButtonDown (0) && canShootBlue) {
 					if (magnet.SetPolarityOrDeactivate (true)) {
 						PlaySound (blueSound);
 					} else {
@@ -51,16 +51,16 @@ public class ShootWeapon : MonoBehaviour
 					} else {
 						PlaySound (deactivateSound);
 					}
-				}
+				}*/
 			} else {
 				change.SetImage2 ();
-			}*/
+			}
 		}
 
 		if (Input.GetButtonDown("Fire1")) 
 		{
 			GameObject newproj = Instantiate (projectile, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
-			newproj.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * 50;
+			newproj.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * 25;
 		}
 	}
 
