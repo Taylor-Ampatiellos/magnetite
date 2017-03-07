@@ -15,11 +15,12 @@ public class ShootWeapon : MonoBehaviour
 
 	//private Camera fpsCam;   
 	private LineRenderer laserLine;
-	private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);
+	private WaitForSeconds shotDuration = new WaitForSeconds(2.00f);
 	public Transform gunEnd;
 
 	public GameObject projectile;
 	public Transform Spawnpoint;
+	public int speed;
 
 	void Start () 
 	{
@@ -32,46 +33,61 @@ public class ShootWeapon : MonoBehaviour
 		int mask = 1 << 8;
 		mask = ~mask;
 		RaycastHit hit;
-		Debug.DrawRay (transform.position, transform.forward * 50);
+		Debug.DrawRay (transform.position, transform.forward * 30);
 
-		if (Physics.Raycast (transform.position, transform.forward, out hit, 50, mask)) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 30, mask)) {
+			float dist = Vector3.Distance(Spawnpoint.position, hit.point);
 			Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
 			notChangable cantchange = hit.transform.gameObject.GetComponent<notChangable> ();
 			if (magnet != null && cantchange == null) {
 				change.SetImage1 ();
-				/* if (Input.GetMouseButtonDown (0) && canShootBlue) {
-					if (magnet.SetPolarityOrDeactivate (true)) {
-						PlaySound (blueSound);
-					} else {
-						PlaySound (deactivateSound);
-					}
+				if (Input.GetMouseButtonDown (0) && canShootBlue) {
+					StartCoroutine (ShotEffectB (magnet, dist));
+
 				} else if (Input.GetMouseButtonDown (1) && canShootRed) {
-					if (magnet.SetPolarityOrDeactivate (false)) {
-						PlaySound (redSound);
-					} else {
-						PlaySound (deactivateSound);
-					}
-				}*/
+					StartCoroutine (ShotEffectR (magnet, dist));
+
+				}
 			} else {
 				change.SetImage2 ();
 			}
 		}
 
-		if (Input.GetButtonDown("Fire1")) 
-		{
-			GameObject newproj = Instantiate (projectile, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
-			newproj.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * 25;
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 50, mask)) {
+			float dist = Vector3.Distance (Spawnpoint.position, hit.point);
+
+			if (Input.GetButtonDown ("Fire1")) {
+				GameObject newproj = Instantiate (projectile, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
+				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 30;
+				StartCoroutine (des (dist, newproj));
+			}
 		}
 	}
 
-	private IEnumerator ShotEffect()
+	private IEnumerator ShotEffectB(Magnetic magnet, float dist)
 	{
-		
-		laserLine.enabled = true;
+		yield return new WaitForSeconds(dist/speed);
+		if (magnet.SetPolarityOrDeactivate (true)) {
+			PlaySound (blueSound);
+		} else {
+			PlaySound (deactivateSound);
+		}
+	}
 
-		yield return shotDuration;
+	private IEnumerator ShotEffectR(Magnetic magnet, float dist)
+	{
+		yield return new WaitForSeconds(dist/speed);
+		if (magnet.SetPolarityOrDeactivate (false)) {
+			PlaySound (redSound);
+		} else {
+			PlaySound (deactivateSound);
+		}
+	}
 
-		laserLine.enabled = false;
+	private IEnumerator des(float dist, GameObject proj)
+	{
+		yield return new WaitForSeconds(dist/speed);
+		Destroy (proj);
 	}
 
 	void PlaySound (AudioClip sound)
