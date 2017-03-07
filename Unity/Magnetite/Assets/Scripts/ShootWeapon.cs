@@ -18,7 +18,8 @@ public class ShootWeapon : MonoBehaviour
 	private WaitForSeconds shotDuration = new WaitForSeconds(2.00f);
 	public Transform gunEnd;
 
-	public GameObject projectile;
+	public GameObject projectileB;
+	public GameObject projectileR;
 	public Transform Spawnpoint;
 	public int speed;
 
@@ -56,9 +57,15 @@ public class ShootWeapon : MonoBehaviour
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 50, mask)) {
 			float dist = Vector3.Distance (Spawnpoint.position, hit.point);
 
-			if (Input.GetButtonDown ("Fire1")) {
-				GameObject newproj = Instantiate (projectile, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
-				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 30;
+			if (Input.GetMouseButtonDown (0) && canShootBlue) {
+				GameObject newproj = Instantiate (projectileB, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
+				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 50;
+				StartCoroutine (des (dist, newproj));
+			}
+
+			if (Input.GetMouseButtonDown (1) && canShootRed) {
+				GameObject newproj = Instantiate (projectileR, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
+				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 50;
 				StartCoroutine (des (dist, newproj));
 			}
 		}
