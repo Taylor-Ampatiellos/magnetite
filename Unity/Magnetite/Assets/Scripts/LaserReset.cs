@@ -14,7 +14,9 @@ public class LaserReset : MonoBehaviour {
 	void Start() {
 		pos = GameObject.FindGameObjectWithTag("PlayerPosition");
 		transform.position = pos.GetComponent<playerposition> ().spawn;
+		transform.localEulerAngles = pos.GetComponent<playerposition> ().rotation;
 		pos.GetComponent<playerposition> ().spawn = transform.position;
+		pos.GetComponent<playerposition> ().rotation = transform.localEulerAngles;
 	}
 
 	void OnTriggerEnter(Collider other) {
