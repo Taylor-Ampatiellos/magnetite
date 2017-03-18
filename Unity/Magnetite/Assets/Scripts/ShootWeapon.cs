@@ -54,18 +54,18 @@ public class ShootWeapon : MonoBehaviour
 			}
 		}
 
-		if (Physics.Raycast (transform.position, transform.forward, out hit, 50, mask)) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 55, mask)) {
 			float dist = Vector3.Distance (Spawnpoint.position, hit.point);
 
 			if (Input.GetMouseButtonDown (0) && canShootBlue) {
 				GameObject newproj = Instantiate (projectileB, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
-				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 50;
+				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 55;
 				StartCoroutine (des (dist, newproj));
 			}
 
 			if (Input.GetMouseButtonDown (1) && canShootRed) {
 				GameObject newproj = Instantiate (projectileR, Spawnpoint.position, Spawnpoint.rotation) as GameObject;
-				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 50;
+				newproj.GetComponent<Rigidbody> ().velocity = (hit.point - transform.position).normalized * 55;
 				StartCoroutine (des (dist, newproj));
 			}
 		}
