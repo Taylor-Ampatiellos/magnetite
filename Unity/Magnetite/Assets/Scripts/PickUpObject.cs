@@ -38,7 +38,7 @@ public class PickUpObject : MonoBehaviour
 	{
 		o.transform.position = Vector3.Lerp (o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth);
 		o.transform.rotation = Quaternion.identity;
-		playHoldSound ();
+		//playHoldSound ();
 	}
 
 	void pickup ()
@@ -61,7 +61,7 @@ public class PickUpObject : MonoBehaviour
 					//p.gameObject.rigidbody.isKinematic = true;
 					carriedObject.GetComponent<Rigidbody> ().useGravity = false;
 					carriedObject.layer = 2;
-					playPickupSound ();
+					//playPickupSound ();
 				}
 			}
 		}
@@ -81,7 +81,7 @@ public class PickUpObject : MonoBehaviour
 		carriedObject.gameObject.GetComponent<Rigidbody> ().useGravity = true;
 		carriedObject.layer = 0;
 		carriedObject = null;
-		playDropSound ();
+		//playDropSound ();
 	}
 
 	void playPickupSound ()

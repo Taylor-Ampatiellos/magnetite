@@ -19,6 +19,13 @@ public class LaserReset : MonoBehaviour {
 		pos.GetComponent<playerposition> ().rotation = transform.localEulerAngles;
 	}
 
+	void OnCollisionEnter(Collision other) {
+		if (other.gameObject.tag == "Magnetic") { 
+			Debug.Log ("ERERE");
+			other.rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
+		}
+	}
+
 	void OnTriggerEnter(Collider other) {
 		DontDestroyOnLoad (pos);
 
