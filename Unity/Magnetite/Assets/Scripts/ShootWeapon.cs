@@ -36,7 +36,7 @@ public class ShootWeapon : MonoBehaviour
 		RaycastHit hit;
 		Debug.DrawRay (transform.position, transform.forward * 30);
 
-		if (Physics.Raycast (transform.position, transform.forward, out hit, 30, mask)) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 55, mask)) {
 			float dist = Vector3.Distance(Spawnpoint.position, hit.point);
 			Magnetic magnet = hit.transform.gameObject.GetComponent<Magnetic> ();
 			notChangable cantchange = hit.transform.gameObject.GetComponent<notChangable> ();
