@@ -4,7 +4,7 @@ using System.Collections;
 public class DownAndUp : MonoBehaviour {
 
 	public float delta = 5f;  // Amount to move left and right from the start point
-	    public float speed = 1.0f; 
+	    public float speed = 0.7f; 
 	    private Vector3 startPos;
 
 	    void Start () {
