@@ -14,8 +14,8 @@ public class ShootWeapon : MonoBehaviour
 	public changeImage change;
 
 	//private Camera fpsCam;   
-	private LineRenderer laserLine;
-	private WaitForSeconds shotDuration = new WaitForSeconds(2.00f);
+	//private LineRenderer laserLine;
+	//private WaitForSeconds shotDuration = new WaitForSeconds(2.00f);
 	public Transform gunEnd;
 
 	public GameObject projectileB;
@@ -25,7 +25,7 @@ public class ShootWeapon : MonoBehaviour
 
 	void Start () 
 	{
-		laserLine = GetComponent<LineRenderer>();
+		//laserLine = GetComponent<LineRenderer>();
 		//fpsCam = GetComponentInParent<Camera>();
 	}
 
