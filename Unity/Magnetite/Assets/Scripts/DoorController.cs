@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Script attached to buttons
+// Controls opening of doors
 public class DoorController : MonoBehaviour
 {
 

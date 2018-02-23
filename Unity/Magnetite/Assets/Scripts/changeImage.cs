@@ -10,9 +10,9 @@ public class changeImage : MonoBehaviour {
 
 	RaycastHit hit;
 
-	void Start() //Lets start by getting a reference to our image component.
+	void Start() //Let's start by getting a reference to our image component.
 	{
-		myImageComponent = GetComponent<Image>(); //Our image component is the one attached to this gameObject.
+		myImageComponent = GetComponent<Image>(); // Our image component is the one attached to this gameObject.
 	}
 
 	public void SetImage1() //method to set our first image
