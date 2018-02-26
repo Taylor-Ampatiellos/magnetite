@@ -11,22 +11,20 @@ public class ShootWeapon : MonoBehaviour
 	public AudioClip redSound;
 	public AudioClip deactivateSound;
 
-	public changeImage change;
+	private changeImage change;
 
-	//private Camera fpsCam;   
-	//private LineRenderer laserLine;
-	//private WaitForSeconds shotDuration = new WaitForSeconds(2.00f);
 	public Transform gunEnd;
 
-	public GameObject projectileB;
-	public GameObject projectileR;
+	private GameObject projectileB;
+	private GameObject projectileR;
 	public Transform Spawnpoint;
 	public int speed;
 
 	void Start () 
 	{
-		//laserLine = GetComponent<LineRenderer>();
-		//fpsCam = GetComponentInParent<Camera>();
+		projectileB = GameObject.FindGameObjectWithTag("pbullet");
+		projectileR = GameObject.FindGameObjectWithTag("pbullet");
+		change = GameObject.FindGameObjectWithTag("crosshair").GetComponent<changeImage>();
 	}
 
 	void Update ()
@@ -104,32 +102,3 @@ public class ShootWeapon : MonoBehaviour
 		audioSource.Play ();
 	}
 }
-
-
-// LASER BEAM //
-
-/*void LateUpdate ()
-	{
-
-
-		if (Input.GetButtonDown("Fire1")) 
-		{
-
-			StartCoroutine (ShotEffect());
-
-			Vector3 rayOrigin = fpsCam.ViewportToWorldPoint (new Vector3(0.5f, 0.5f, 0.0f));
-
-			RaycastHit hit2;
-
-			laserLine.SetPosition (0, gunEnd.position);
-
-			if (Physics.Raycast (rayOrigin, fpsCam.transform.forward, out hit2, 100))
-			{
-				laserLine.SetPosition (1, hit2.point);
-			}
-			else
-			{
-				laserLine.SetPosition (1, rayOrigin + (fpsCam.transform.forward * 100));
-			}
-		}
-	}*/
